@@ -6,42 +6,58 @@ import {
   SidebarProvider,
   SidebarMenuButton,
 } from '@/components/ui/sidebar';
-import { Pencil, GalleryVerticalEnd, Home } from 'lucide-react';
+import { Pencil, Home } from 'lucide-react';
 import Link from 'next/link';
+import MobileHeader from './mobile-header';
+import Logo from '@/components/server/logo';
+import { usePathname } from 'next/navigation';
 
 export default function MainSidebar({ children }: { children: React.ReactNode }) {
-  return (
-    <SidebarProvider>
-      <Sidebar>
-        <SidebarContent className='p-4'>
-          <Link href='/'>
-            <SidebarMenuButton asChild>
-              <span>
-                <Home />
-                Home
-              </span>
-            </SidebarMenuButton>
-          </Link>
-          <Link href='/drawer'>
-            <SidebarMenuButton asChild>
-              <span>
-                <Pencil />
-                Draw
-              </span>
-            </SidebarMenuButton>
-          </Link>
+  const pathname = usePathname();
 
-          <Link href='/gallery'>
-            <SidebarMenuButton asChild>
-              <span>
-                <GalleryVerticalEnd />
-                Gallery
-              </span>
-            </SidebarMenuButton>
-          </Link>
-        </SidebarContent>
-      </Sidebar>
-      {children}
-    </SidebarProvider>
+  const isActive = (path: string) => pathname === path;
+
+  return (
+    <>
+      <MobileHeader />
+      <SidebarProvider>
+        <Sidebar>
+          <SidebarContent className='p-4'>
+            <Logo />
+            <Link href='/'>
+              <SidebarMenuButton
+                asChild
+                className={`hover:bg-primary-hover ${
+                  isActive('/') ? 'bg-primary font-semibold' : ''
+                }`}
+              >
+                <span>
+                  <div className='rounded-sm bg-gray-100 p-2'>
+                    <Home className='h-3 w-3' strokeWidth={2.5} />
+                  </div>
+                  Home
+                </span>
+              </SidebarMenuButton>
+            </Link>
+            <Link href='/drawer'>
+              <SidebarMenuButton
+                asChild
+                className={`hover:bg-primary-hover ${
+                  isActive('/drawer') ? 'bg-primary font-semibold' : ''
+                }`}
+              >
+                <span>
+                  <div className='rounded-sm bg-gray-100 p-2'>
+                    <Pencil className='h-3 w-3' strokeWidth={2.5} />
+                  </div>
+                  Draw
+                </span>
+              </SidebarMenuButton>
+            </Link>
+          </SidebarContent>
+        </Sidebar>
+        {children}
+      </SidebarProvider>
+    </>
   );
 }

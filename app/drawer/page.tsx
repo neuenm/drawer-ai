@@ -1,5 +1,8 @@
-import Drawer from '@/components/client/drawer';
+import Drawer from '@/components/client/drawer/tldraw';
+import { serverClient } from '@/app/_trpc/server';
 
-export default function App() {
-  return <Drawer />;
+export default async function DrawerPage() {
+  const existentDrawing = await serverClient.getDrawing();
+
+  return <Drawer existentDrawing={existentDrawing} />;
 }

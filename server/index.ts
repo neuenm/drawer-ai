@@ -1,9 +1,41 @@
 import { publicProcedure, router } from './trpc';
+import { z } from 'zod';
+import { prisma } from '@/db';
 
 export const appRouter = router({
-  hello: publicProcedure.query(async () => {
-    return 'Hi Vidext!';
+  getDrawing: publicProcedure.query(async () => {
+    return prisma.drawing.findFirst();
   }),
+
+  updateDrawing: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        content: z.any(),
+      })
+    )
+    .mutation(async ({ input: { content, id } }) => {
+      return prisma.drawing.update({
+        where: { id },
+        data: {
+          content,
+        },
+      });
+    }),
+
+  createDrawing: publicProcedure
+    .input(
+      z.object({
+        content: z.any(),
+      })
+    )
+    .mutation(async ({ input: { content } }) => {
+      return prisma.drawing.create({
+        data: {
+          content,
+        },
+      });
+    }),
 });
 
 export type AppRouter = typeof appRouter;

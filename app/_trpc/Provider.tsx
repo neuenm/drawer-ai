@@ -6,12 +6,12 @@ import { httpBatchLink } from '@trpc/react-query';
 
 const queryClient = new QueryClient();
 
-export default function Provider({ children }: { children: React.ReactNode }) {
+export default function TRPCProvider({ children }: { children: React.ReactNode }) {
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: 'http://localhost:3000/api/trpc',
+          url: `${process.env.NEXT_PUBLIC_WEB_URL}/api/trpc`,
         }),
       ],
     })
