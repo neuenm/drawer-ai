@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import TRPCProvider from './_trpc/Provider';
 import MainSidebar from '@/components/client/sidebar';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,7 +30,10 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <TRPCProvider>
           <MainSidebar>
-            <div className='h-screen w-screen'>{children}</div>
+            <div className='h-screen w-screen'>
+              {children}
+              <Toaster />
+            </div>
           </MainSidebar>
         </TRPCProvider>
       </body>

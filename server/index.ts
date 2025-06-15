@@ -1,6 +1,7 @@
 import { publicProcedure, router } from './trpc';
 import { z } from 'zod';
 import { prisma } from '@/db';
+import { TLRecord } from 'tldraw';
 
 export const appRouter = router({
   getDrawing: publicProcedure.query(async () => {
@@ -11,7 +12,7 @@ export const appRouter = router({
     .input(
       z.object({
         id: z.string(),
-        content: z.any(),
+        content: z.record(z.any()),
       })
     )
     .mutation(async ({ input: { content, id } }) => {
@@ -26,7 +27,7 @@ export const appRouter = router({
   createDrawing: publicProcedure
     .input(
       z.object({
-        content: z.any(),
+        content: z.record(z.any()),
       })
     )
     .mutation(async ({ input: { content } }) => {
