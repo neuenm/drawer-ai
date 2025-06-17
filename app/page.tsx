@@ -28,8 +28,8 @@ export default function HomePage() {
     },
     {
       icon: <Layers className='h-6 w-6' />,
-      title: 'Modificación de Formas',
-      description: 'Botones especiales para modificar elementos del canvas',
+      title: 'Modificación de Formas mediante IA',
+      description: 'Funcionalidad para crear elementos en el canvas',
     },
   ];
 
@@ -37,7 +37,7 @@ export default function HomePage() {
     'Editor page con funcionalidad completa',
     'API endpoint para recuperar datos almacenados',
     'Actualización automática del store tras cambios',
-    'Botón para modificar formas dinámicamente',
+    'Botón para modificar formas mediante IA',
     'API routes de Next.js para operaciones server-side',
     'Styling con TailwindCSS y componentes Shadcn',
     'tRPC para llamadas API type-safe',
@@ -190,7 +190,6 @@ export default function HomePage() {
                     <ul className='space-y-2 text-gray-600'>
                       <li>• tRPC para APIs type-safe</li>
                       <li>• Next.js API routes</li>
-                      <li>• Manejo de errores y loading states</li>
                       <li>• Prisma + SQLite para persistencia de datos</li>
                     </ul>
                   </div>

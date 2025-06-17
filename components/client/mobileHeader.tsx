@@ -6,13 +6,9 @@ import { Menu, Home, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import Logo from '@/components/server/logo';
-import { usePathname } from 'next/navigation';
 
-export default function MobileHeader() {
+export default function MobileHeader({ isActive }: { isActive: (path: string) => boolean }) {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-
-  const isActive = (path: string) => pathname === path;
 
   return (
     <Collapsible open={open} onOpenChange={setOpen}>

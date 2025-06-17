@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/sidebar';
 import { Pencil, Home } from 'lucide-react';
 import Link from 'next/link';
-import MobileHeader from './mobile-header';
+import MobileHeader from './mobileHeader';
 import Logo from '@/components/server/logo';
 import { usePathname } from 'next/navigation';
 
@@ -19,7 +19,7 @@ export default function MainSidebar({ children }: { children: React.ReactNode })
 
   return (
     <>
-      <MobileHeader />
+      <MobileHeader isActive={isActive} />
       <SidebarProvider>
         <Sidebar>
           <SidebarContent className='p-4'>

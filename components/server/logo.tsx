@@ -1,5 +1,5 @@
 import React from 'react';
-import { Palette } from 'lucide-react'; // Asegurate de importar esto
+import { Palette } from 'lucide-react';
 
 const Logo = () => (
   <div className='flex items-center space-x-3'>

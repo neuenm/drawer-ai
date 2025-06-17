@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useEditor, getSnapshot } from 'tldraw';
 import { debounce } from 'lodash';
 import { trpc } from '@/app/_trpc/client';
@@ -12,16 +12,18 @@ export default function AutoSaveListener({
   const editor = useEditor();
   const createDrawing = trpc.createDrawing.useMutation();
   const updateDrawing = trpc.updateDrawing.useMutation();
+
+  const previousSavedIdRef = useRef(existentDrawingId);
+
   useEffect(() => {
     const saveChanges = debounce(() => {
       const { document } = getSnapshot(editor.store);
-      if (existentDrawingId) {
+      if (previousSavedIdRef.current) {
         updateDrawing.mutate(
-          { id: existentDrawingId, content: document },
+          { id: previousSavedIdRef.current, content: document },
           {
             onSettled: (data, error) => {
               if (error) {
-                console.error('Error actualizando:', error);
                 toast.error(`Error actualizando, ${error}`);
               } else {
                 toast.success('Actualizado correctamente');
@@ -35,9 +37,9 @@ export default function AutoSaveListener({
           {
             onSettled: (data, error) => {
               if (error) {
-                console.error('Error creando:', error);
                 toast.error(`Error creando, ${error}`);
               } else {
+                if (!previousSavedIdRef.current) previousSavedIdRef.current = data?.id ?? null;
                 toast.success('Primer guardado finalizado');
               }
             },
@@ -58,6 +60,5 @@ export default function AutoSaveListener({
       saveChanges.cancel();
     };
   }, [editor]);
-
   return null;
 }
