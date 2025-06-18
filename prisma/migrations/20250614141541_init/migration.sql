@@ -1,6 +1,0 @@
--- CreateTable
-CREATE TABLE "Drawing" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "content" JSONB NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
