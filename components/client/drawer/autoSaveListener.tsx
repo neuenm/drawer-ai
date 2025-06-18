@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useEditor, getSnapshot } from 'tldraw';
 import { debounce } from 'lodash';
 import { trpc } from '@/app/_trpc/client';

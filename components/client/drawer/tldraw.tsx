@@ -124,13 +124,21 @@ export default function Drawer({ existentDrawing }: DrawerProps) {
                 id: createShapeId(),
               };
               editorRef.current.createShape(uniqueShape);
-            } catch (err: any) {
-              toast.error('Error creando shape:', err);
+            } catch (err: unknown) {
+              if (err instanceof Error) {
+                toast.error('Error creando shape: ' + err.message);
+              } else {
+                toast.error('Error creando shape desconocido');
+              }
             }
           }
         },
-        onError: (error: any) => {
-          toast.error(`Error generando shape con IA: ${error.message}`);
+        onError: (error: unknown) => {
+          if (error instanceof Error) {
+            toast.error(`Error generando shape con IA: ${error.message}`);
+          } else {
+            toast.error('Error generando shape desconocido');
+          }
         },
       }
     );
