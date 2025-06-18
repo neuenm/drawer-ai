@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Drawer from '@/components/client/drawer/tldraw';
 import { serverClient } from '@/app/_trpc/server';
 
