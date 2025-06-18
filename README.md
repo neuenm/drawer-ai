@@ -9,13 +9,6 @@ npm i
 
 ```
 
-Run init migration:
-
-```bash
-npx prisma migrate dev --name init
-
-```
-
 Run the development server:
 
 ```bash
@@ -29,3 +22,10 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+API Endpoint to obtain current data
+
+```bash
+Localhost: http://localhost:3000/api/trpc/getDrawing
+Live demo: https://vidext-liard.vercel.app/api/trpc/getDrawing
+```
